@@ -1,0 +1,3 @@
+
+# OpenVPN private keys must never be tracked
+files/etc/openvpn/*.key

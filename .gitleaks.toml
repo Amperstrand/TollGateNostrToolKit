@@ -1,0 +1,36 @@
+# Gitleaks allowlist — every entry justified. No blanket suppression.
+#
+# TollGateNostrToolKit is a public PoC toolkit (fork). Everything flagged in
+# its history is PoC/demo material from its 2024 router experiments; none of
+# it guards real money or production infrastructure. Each entry below names
+# the class and the re-rotation trigger.
+
+title = "TollGateNostrToolKit gitleaks config"
+
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "OpenVPN server.key in git history (vpn PoC, untracked at tip since a35182f 2026-09-06): profile never deployed; regenerate the key if this VPN profile is ever provisioned"
+paths = [
+  '''files/etc/openvpn/server\.key''',
+]
+
+[[allowlists]]
+description = "GetUserlogin CGI script embedded an RSA private key (amperstand commit cb03ca4, 'lets encrypt and sample vpn config'): demo-router PoC firmware, history-only; regenerate the keypair if that firmware build is ever flashed again"
+paths = [
+  '''files/www/rest/GetUserlogin''',
+]
+
+[[allowlists]]
+description = "Demo-service fixtures: minibits demo-mint cashu token (decode.sh example) and demo.lnbits.com playground API key (redeem_lnurlw.sh) — public demo instances, throwaway by design; replace the lnbits key when convenient"
+paths = [
+  '''files/cgi-bin/decode\.sh''',
+  '''files/cgi-bin/redeem_lnurlw\.sh''',
+]
+
+[[allowlists]]
+description = "OpenWrt build-log noise: 100k-line make logs whose filenames/paths trip entropy heuristics; no credentials present"
+paths = [
+  '''routers/.*''',
+]

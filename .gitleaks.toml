@@ -1,0 +1,11 @@
+# Gitleaks allowlist — every entry justified.
+title = "TollGateNostrToolKit gitleaks config"
+
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "OpenVPN server.key in git history (vpn PoC branch, untracked at tip since a35182f 2026-09-06): PoC profile never deployed; regenerate if this VPN profile is ever provisioned. dh.pem is a public parameter and stays tracked."
+paths = [
+  '''files/etc/openvpn/server\.key''',
+]

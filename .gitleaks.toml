@@ -11,7 +11,8 @@ title = "TollGateNostrToolKit gitleaks config"
 useDefault = true
 
 [[allowlists]]
-description = "OpenVPN server.key in git history (vpn PoC, untracked at tip since a35182f 2026-09-06): profile never deployed; regenerate the key if this VPN profile is ever provisioned"
+description = "OpenVPN server.key in git history (vpn PoC, untracked at tip since a35182f 2026-09-06): profile never deployed; scoped to the single historical finding (commit 8b80fcff, fingerprint 8b80fcffbc1c8d38ce4445421b1d6541883165f4:files/etc/openvpn/server.key:private-key:1) — a regenerated key committed at this path is a NEW commit and is reported normally, which is the re-rotation trigger"
+commits = ["8b80fcffbc1c8d38ce4445421b1d6541883165f4"]
 paths = [
   '''files/etc/openvpn/server\.key''',
 ]
@@ -30,7 +31,7 @@ paths = [
 ]
 
 [[allowlists]]
-description = "OpenWrt build-log noise: 100k-line make logs whose filenames/paths trip entropy heuristics; no credentials present"
+description = "OpenWrt build-log noise: 100k-line make logs whose filenames/paths trip entropy heuristics; no credentials present. Scoped to the log files only — shell scripts and live configs under routers/ must stay scanned"
 paths = [
-  '''routers/.*''',
+  '''routers/errors/make_logs_.*\.md''',
 ]
